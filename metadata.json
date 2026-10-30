@@ -1,0 +1,8 @@
+{
+  "name": " Sistema de Gestión GANADERA - Pozo del Carril",
+  "description": "Sistema de gestión integral para la Unidad C de Producción Porcina del establecimiento Pozo del Carril - La Aguada (FCE UNRC).",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

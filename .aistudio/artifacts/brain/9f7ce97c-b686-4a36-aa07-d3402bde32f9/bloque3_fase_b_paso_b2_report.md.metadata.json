@@ -1,0 +1,5 @@
+{
+  "summary":  "Informe técnico final de cumplimiento para el Bloque 3, Fase B, Paso B2: Integración de la edición administrativa con Google Sheets y Google Apps Script. Clasifica detalladamente los estados entre implementado en código, desplegado en Apps Script y verificado con Google Sheets. Incluye arquitectura OCC con LockService, esquema de idempotencia persistente en _Operaciones_Idempotencia, migración no destructiva y guía de despliegue manual.",
+  "updatedAt":  "2026-10-24T16:51:39.911077503Z",
+  "userFacing":  true
+}

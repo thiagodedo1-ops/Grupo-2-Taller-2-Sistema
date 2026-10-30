@@ -1,0 +1,5 @@
+{
+  "appsScriptUrl": "",
+  "updatedAt": "2026-10-22T19:24:09.071Z",
+  "note": "Almacena la URL de Google Apps Script para persistir la conexión al duplicar la aplicación. No almacena credenciales ni claves privadas."
+}

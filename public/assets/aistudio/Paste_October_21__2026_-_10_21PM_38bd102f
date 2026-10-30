@@ -1,0 +1,254 @@
+PROMPT PARA GOOGLE AI STUDIO — MÓDULO DE GANADERÍA BOVINA
+INSTRUCCIÓN PRIORITARIA — NO DUPLICAR PORCINOS
+Desarrollá la Unidad Bovina como módulo funcional independiente. Reutilizá autenticación, navegación, catálogos compartidos, comprobantes y componentes técnicos existentes, no lógica zootécnica porcina. Prohibido mostrar capones, lechones, cerdas, ROSPORC, parámetros porcinos o indicadores porcinos en bovinos. No modificar ni borrar datos de Porcinos u Ovinos. Antes de migrar tablas o componentes, auditá dependencias y prepará copia de seguridad, migración reversible y pruebas de regresión.
+La estructura jerárquica es: establecimiento → unidad ganadera Bovinos → subunidad/etapa (Cría, Recría, Adaptación, Engorde) → lote/animal, con una dimensión INDEPENDIENTE de línea o destino productivo (Carne / Cabaña Angus / Reposición / Sin definir). Un animal puede atravesar etapas y cambiar de destino sin duplicar su identidad ni alterar su pertenencia a Bovinos. Una línea productiva no crea una cuarta unidad ganadera. Los catálogos compartidos admiten relación muchos-a-muchos con especies/actividades; no imponer un único campo `especie` si un proveedor, potrero o insumo sirve a varias unidades.
+CONDICIÓN INNEGOCIABLE — PRESERVAR POR COMPLETO LA UNIDAD PORCINA
+Este pedido es exclusivamente para desarrollar y adaptar la Unidad Bovina dentro de la misma aplicación. La Unidad Porcina ya está desarrollada y sus avances deben permanecer intactos. No refactorizar, rediseñar, renombrar, eliminar ni sustituir sus páginas, formularios, campos, servicios, indicadores, reglas de negocio, cotizaciones ROSPORC, registros, permisos, vínculos con Google Sheets ni datos históricos. No alterar la Unidad Ovina.
+Antes de programar:
+Inventariá los módulos, archivos, componentes, rutas, tablas/hojas, fórmulas y servicios utilizados actualmente por Porcinos y sus dependencias compartidas.
+Realizá y verificá un respaldo completo, con mecanismo de reversión probado para cualquier migración. Si el entorno no permite respaldar o verificar, no ejecutes migraciones ni operaciones destructivas; informá qué falta.
+Guardá una línea de base funcional de Porcinos: capturas/estructura de las pantallas, rutas, permisos, registros de prueba controlados, resultados de indicadores y cálculos, consultas de Google Sheets y comportamiento de carga/edición.
+Priorizá agregar componentes, configuraciones, rutas y registros específicos de Bovinos, con reutilización no destructiva de componentes compartidos. No reemplaces un componente porcino por uno bovino ni hagas cambios globales de texto (por ejemplo, sustituir «capón» por «novillo» en todo el proyecto).
+Si una mejora necesita modificar un servicio, tabla, hoja o componente compartido, presentá previamente el cambio exacto, impacto en las tres unidades, plan de migración reversible y pruebas de regresión. Esperá autorización expresa antes de ese cambio compartido.
+Ejecutá pruebas de regresión de Porcinos antes y después de cada etapa: inicio de sesión, selector de unidad, Cría/Partos, Destete y lotes, Alimentación e ICA, Existencias/VNR, Compras, Ventas (fletes, descuentos, ROSPORC por fecha), Costos, Presupuestos y desvíos, Indicadores CMI (incluido A5 visitas estudiantiles), campañas, moneda ARS/USD, usuarios y catálogos de Google Sheets, ayuda/manual y permisos.
+Compará resultados y estructura contra la línea de base. Si cambia un comportamiento porcino no autorizado, detené la implementación y revertí ese cambio antes de continuar.
+Criterio de aceptación: la Unidad Bovina funciona sin que se produzca ninguna regresión, pérdida de datos o modificación funcional/visual no autorizada en Porcinos. La similitud de diseño NO habilita la reutilización de reglas productivas porcinas.
+COHERENCIA VISUAL Y ORGANIZATIVA CON EL SISTEMA EXISTENTE
+El nuevo módulo bovino debe parecer parte de la misma aplicación que Porcinos, no otro sistema agregado ni una copia superficial. Tomá los componentes y patrones visuales realmente presentes en el proyecto como referencia antes de diseñar.
+Respetá, salvo diferencias productivas justificadas:
+La identidad visual general: tipografías, colores, espaciados, íconos, encabezados, tarjetas, tablas, formularios, botones, mensajes, validaciones, estados vacíos y diseño adaptable.
+El flujo de inicio de sesión con rango operativo asignado automáticamente, sin selector de rango; el selector superior de unidad autorizada (Porcinos/Bovinos/Ovinos), sin volver a autenticarse.
+El menú lateral agrupado en secciones desplegables, con los mismos criterios de denominación, navegación y jerarquía: Panel General, Producción, Gestión Comercial, Gestión Económica, Modelo de Gestión, Administración (según permisos) y Ayuda. Dentro de Bovinos, las subpantallas serán específicamente bovinas, pero con la misma disposición general.
+Un Panel General bovino con tarjetas de resultados, semáforos configurables, selector de campaña, filtros por período y acceso al historial. Mantener patrones iguales a los usados por Porcinos; no copiar sus valores.
+La solapa Indicadores bajo las cuatro perspectivas del CMI, con metas configurables, semáforos, filtros y selección individual de indicadores prioritarios. Los indicadores y sus metas serán propios de Bovinos.
+Los módulos compartidos de Compras, Ventas, Presupuesto y Desvíos, historial, cotizaciones/cambio ARS-USD, catálogos centrales, usuarios administradores, AYUDA → Manual de uso y guía interactiva. Respetar controles y flujos existentes; adaptar exclusivamente los campos y las reglas por especie.
+La persistencia en Google Sheets u otro almacenamiento ya implementado, utilizando los mismos patrones de guardado, identificadores, validación y actualización de listas desplegables, pero aislando todos los movimientos por id de Unidad Bovina.
+Equivalencia de navegación, no identidad de formularios: si Porcinos tiene la opción «Ventas», Bovinos también debe tener «Ventas» en una posición equivalente, pero con categorías bovinas, precios bovinos/MAG verificables o precio real, opciones por kg vivo o por cabeza y liquidaciones por consignataria cuando corresponda; jamás ROSPORC/capones. Del mismo modo, Producción bovina tendrá servicio, preñez, parto, destete, recría, adaptación y engorde, en vez de reproducir el circuito porcino.
+Entregá una matriz de correspondencia entre pantalla porcina existente, componente visual reutilizado, pantalla bovina equivalente, diferencias funcionales y origen de datos. Identificá expresamente qué se comparte sin cambios y qué es nuevo. No inventes nombres de rutas ni confirmes funcionalidades que no hayas comprobado en el proyecto.
+CRITERIOS DE FUENTE Y DATOS
+Fuente de caracterización: «Informe de taller – Primera Etapa, Unidad Bovina» (UNRC, trabajo académico). Sus etapas, ejemplos de costos, fechas, pesos, precios, categorías y supuestos fiscales sirven para diseñar y probar, no prueban hechos históricos ni operaciones efectivas del establecimiento. Mantener trazabilidad de fuente, fecha, autor y estado (real / estimado / simulado / pendiente de validar). No crear ventas, stock, saldos, animales ni cotizaciones reales a partir de ejemplos.
+ROL
+Actuá como desarrollador full-stack y analista funcional especializado en sistemas de gestión agropecuaria argentinos (producción ganadera, normativa contable argentina vigente (incluida RT 54 y su aplicación jurisdiccional), trazabilidad SENASA). Respondé y generá toda la interfaz en español rioplatense.
+CONTEXTO DEL SISTEMA
+Estoy desarrollando un sistema de gestión integral para el establecimiento "Pozo del Carril – La Aguada" (Río Cuarto, Córdoba), que engloba tres producciones: porcina, bovina y ovina. Necesito que desarrolles la sección de Ganadería Bovina.
+Requisitos de integración con el resto del sistema:
+Los catálogos comunes (sectores/potreros, proveedores, clientes/consignatarios, fondos de pago, insumos y plan de cuentas) son compartidos por las tres producciones. Primero identificá el esquema existente. Si requiere diferenciar usos por especie o actividad, proponé una relación compatible (incluso muchos-a-muchos), sin modificar estructuras compartidas sin autorización expresa.
+Lo específico del bovino (categorías, ficha individual del animal, reproducción, pesajes, decisión de venta) vive en su propio módulo.
+Todos los parámetros productivos (pesos, días, precios, alícuotas, umbrales) deben ser configurables desde una pantalla de parámetros, nunca fijos en el código. Los valores de abajo son referencias del informe académico y NO datos operativos verificados ni valores por defecto obligatorios.
+1. CARACTERIZACIÓN PRODUCTIVA
+Sistema de ciclo completo sobre una Cabaña Angus, con dos líneas productivas internas de la Unidad Bovina:
+Producción de Carne (línea / destino comercial transversal a las etapas): cotiza en $/kg vivo, referencia Mercado Agroganadero de Cañuelas (MAG).
+Cabaña Angus (línea genética / destino comercial y reproductivo transversal a las etapas): venta de reproductores puros controlados, cotiza en $/cabeza (sin precio de referencia de mercado; el precio depende de cada animal).
+Parición estacionada (fines de otoño / principios de primavera). Destete posible entre fines de febrero (escenario crítico) y fines de mayo (escenario favorable).
+Etapas del ciclo (referencias del informe; no valores reales ni predeterminados obligatorios)
+Etapa	Objetivo	Disparador de salida	Peso salida	Duración
+1. Cría	Producir el ternero/a (servicio de la madre → destete)	Destete (por oferta forrajera, estado de la madre o conveniencia económica)	90 kg (destete precoz) a 140–160 kg (habitual)	Variable
+2. Recría	Crecimiento estructural óseo/muscular. Modalidad: intensiva (corral), extensiva (pasto) o mixta	Peso	260–280 kg	5–6 meses hasta 1 año
+3. Adaptación	Transición digestiva a ración	Días	—	15–20 días
+4. Engorde / Terminación (o Preparación de Cabaña)	Producción intensiva de carne y grasa	Peso objetivo	420–450 kg (mercado interno)	≈90 días (configurable; ver nota de inconsistencia)
+Reglas de flujo:
+Punto orientativo de evaluación a los 260–280 kg: sugerir revisar destino Carne / Cabaña / Reposición / Otro, sin bloquear el flujo ni imponer un peso fijo. Registrar fecha, motivo y responsable de la decisión.
+Hembras destinadas a madres propias o venta como vientres no pasan por Adaptación ni Terminación.
+Machos destinados a reproductores reciben el mismo tratamiento que las hembras reproductoras.
+Los machos enteros pueden comercializarse como MEJ cuando cumplan las condiciones comerciales y regulatorias aplicables; no asignar MEJ automáticamente a todo macho entero.
+Vacas de descarte pueden venderse directamente o pasar por una etapa de acondicionamiento/terminación, según decisión registrada.
+Destino comercial de carne: consumo interno (no exportación).
+2. CATEGORÍAS DE HACIENDA
+Categoría	Etapa	Rango de peso (kg)	Función / disparador	Unidad de negocio
+Vacas	Cría (plantel en producción)	> 400	Madres en servicio/lactancia; permanecen mientras sean fértiles	Carne / Cabaña
+Vacas secas	Cría (transición)	> 400	Gestantes sin ternero al pie tras el destete; pasan a lote de parición	Carne / Cabaña
+Vacas preñadas	Cría (gestación)	450–600	Confirmadas por tacto/ecografía	Carne / Cabaña
+Vaquillonas 1	Recría (1er año)	280–340	Reposición/recría	Carne / Cabaña
+Vaquillonas 2	Entore / servicio	341–400	Primer servicio o venta como reposición pura	Cabaña
+Terneros	Cría (lactancia)	40–140	Machos al pie de la madre	Carne / Cabaña
+Terneras	Cría (lactancia)	40–140	Hembras al pie de la madre	Carne / Cabaña
+Destete	Transición cría–recría	140–220	Recién destetados, inician recría pastoril	Carne / Cabaña
+Novillitos (sub: en adaptación / en engorde)	Recría / Engorde	280–420	Machos castrados con destino carne	Carne
+Novillos	Engorde / Terminación	> 420–430	Salida a faena a 420–450 kg	Carne
+Toros	Reproducción (plantel)	650–900	Padres activos; su descarte va a venta comercial	Cabaña
+Toritos / MEJ	Preparación / Cabaña	hasta 450	Sin destino definido: reproductor o terminado como MEJ a carne	Carne / Cabaña
+Vacas descarte / Toros descarte	Salida	—	Fin de vida reproductiva, destino venta	Carne
+Separar categoría comercial, etapa productiva, estado reproductivo (preñada/vacía/seca/lactante), destino y titularidad. Las filas «vacas secas» y «vacas preñadas» de esta tabla son estados, no categorías excluyentes. Los pesos son orientativos, no límites automáticos. Para valuación, el sistema debe permitir abrir categorías por rango de kilaje (ej. terneros cada 20 kg) y por estado reproductivo (vientres preñados/vacíos, destino cría o invernada).
+3. ALIMENTACIÓN E INSUMOS CRÍTICOS
+Recursos: grano (maíz propio o comprado, embolsado), silo de maíz, forraje/pastura, rastrojo, sistema silvopastoril, ración de adaptación y de engorde, balanceado y suplementación mineral.
+Recría extensiva = más fibra, menor conversión, más tiempo y más barata; intensiva = mayor conversión, menos tiempo; mixta = busca máxima conversión al menor costo.
+Consumo de alimento se registra por lote, por etapa e insumo, en kg y con costo unitario.
+Ejemplo académico de estructura de costo por animal (NO cargar como costo real ni como asiento):
+Rubro	$/animal	%
+Alimentación y forrajes (ración, silo, suplementación)	465.000	79,6%
+Sanidad y mano de obra (vacunación oficial, antiparasitarios, manga)	60.000	10,3%
+Capital inmovilizado (costo de oportunidad del activo biológico)	58.800	10,1%
+Total costo agregado	583.800	100%
+Otros insumos: sanidad (vacunas antiaftosa y antibrucélica obligatorias, antiparasitarios, honorarios veterinarios), genética y trazabilidad (dosis de semen de toros probados, insumos IATF, caravanas electrónicas RFID, caravanas internas, inscripciones en la Asociación Argentina de Angus / SRA, evaluaciones DEP, pedigree), combustibles.
+4. REFERENCIAS DE MERCADO
+Valores ilustrativos citados por el informe académico para 08/09/2026, en $/kg vivo (NO precargar como cotizaciones reales ni atribuir a MAG sin verificación de fuente y categoría):
+Categoría	$/kg vivo
+Terneros	6.500 (consignatarias locales, sin dato MAG)
+Novillitos	4.900
+Novillos	4.500
+Vaquillonas	4.700
+Vaca	3.000
+Toro	3.000
+MEJ	4.000
+Criterios de precio que el sistema debe reflejar:
+Relación entre categoría, peso y precio: mostrar diferencias observadas, sin imponer una relación inversa universal.
+Grado de terminación: registrar condición comercial y terminación cuando existan datos; no garantizar premios ni máximos de pizarra.
+MEJ: cotizar por categoría, plaza y operación; no imponer descuentos universales.
+Canal comercial: consignatarias (feria/remate) para ambas unidades de negocio. Reproductores: remates de cabaña anuales o venta particular, por cabeza.
+5. TRATAMIENTO CONTABLE Y FISCAL
+Implementar un motor de reglas versionado por fecha de vigencia y jurisdicción, con alícuotas y tratamientos editables por usuario autorizado. No codificar como universales IVA 10,5% de hacienda, 21% de servicios, sellados o retenciones: usarlos solo en simulaciones expresamente identificadas y tras validar su aplicabilidad.
+IVA débito/crédito, retenciones y percepciones deben distinguirse de ingresos, gastos y obligaciones, según la operación y el régimen fiscal efectivo. Registrar bases imponibles, sujetos, conceptos, fechas y comprobantes.
+Tomar como referencia la RT 54 (NUA), capítulo de actividad agropecuaria, y normas aplicables según jurisdicción y fecha; no aplicar mecánicamente la RT 22. El profesional contable debe aprobar políticas de reconocimiento, medición, amortización y exposición antes de automatizar asientos.
+Diferenciar animales destinados a venta, reproductores en uso, futuros reproductores, hacienda de terceros y cambios de destino. El tratamiento contable surge de la política aprobada, no solo de la categoría zootécnica.
+Distinguir resultado por producción/transformación biológica, variación de precios, ventas, costos y bajas, evitando doble cómputo. No presumir que toda mortandad se mide a costo histórico.
+El costo de oportunidad del capital debe mostrarse por separado del costo contable incurrido; no contabilizarlo como gasto automáticamente.
+Permitir revisión y reversión auditada de asientos; no contabilizar liquidaciones preliminares como definitivas.
+Plan de cuentas bovino (estructura a implementar)
+1.1 Disponibilidades (caja chica, fondo rotatorio)
+1.2 Créditos: deudores por venta; consignatario c/liquidación a cobrar; anticipos a proveedores; créditos fiscales (IVA CF, saldo técnico, retenciones y percepciones de IVA, Ganancias e IIBB sufridas)
+1.3.01 Existencias hacienda bovina: una subcuenta por categoría (no se admite cuenta única "Hacienda"); Novillitos con 5º nivel (en adaptación / en engorde)
+1.3.02 Existencias insumos: alimento, productos veterinarios (incluye semen/IATF), combustibles
+1.4.01 Activos biológicos de producción: toros reproductores y vacas de cría, con amortización acumulada
+1.4.02 Bienes de uso: instalaciones de adaptación/engorde, alambrados y silvopastoril, equipos (manga, balanza, lector RFID, etc.), amortización acumulada
+2 Pasivo: proveedores, deudas por rendiciones, deudas fiscales (IVA DF, IIBB, retenciones practicadas), remuneraciones y cargas sociales
+3 Ingresos: venta de hacienda para consumo (terneros, novillos terminados, vacas descarte, toros descarte); venta de reproductores (toros, vacas de cría); resultado por tenencia (crecimiento / precio); pastaje a terceros
+4 Costos: alimentación, sanidad y mortandad abiertos por etapa (Cría / Recría / Adaptación / Engorde); reproducción (semen/IATF, amortización de toros); mano de obra directa; traslado interno; costos indirectos a prorratear (por cabeza o por hectárea, compartidos con agricultura y otras producciones); gastos de estructura; gastos de comercialización (comisión, guías y DT-e, flete a feria, sellados y tasas)
+5 Cuentas de orden / registros físicos: cabezas por categoría; madres desechadas por año; kilos producidos por etapa; kilos vendidos por categoría; alimento consumido por etapa; superficie ocupada (ha); días de permanencia y GDP por etapa; hacienda de terceros
+Requisito clave: el registro físico (cabezas, kg) y el monetario ($) usan las mismas categorías y se sincronizan automáticamente con cada movimiento.
+6. MODELO DE DATOS
+Catálogos
+cat_sector: id_sector PK, nombre, tipo_sector (Potrero/Corral/Manga/Silo), superficie_ha, establecimiento, activo, especie_uso.
+cat_unidad_negocio: mantener el catálogo maestro del sistema con las unidades ganaderas PORCINOS, BOVINOS y OVINOS; no insertar Carne, Cría o Cabaña Angus como unidades hermanas.
+cat_subunidad_bovina: id_subunidad PK, id_unidad_negocio FK=BOVINOS, nombre (Cría/Recría/Adaptación/Engorde), orden_ciclo, descripción, activo; si el sistema ya modela etapas, adaptar sin duplicar.
+cat_linea_bovina: id_linea PK, id_unidad_negocio FK=BOVINOS, nombre (Producción de Carne/Cabaña Angus), tipo_cotizacion_preferido (kg vivo/cabeza), referencia_mercado_opcional, activo; representa actividad/destino y no etapa.
+hist_destino_animal: id_evento PK, id_animal FK, id_linea_anterior FK opcional, id_linea_nueva FK, fecha, motivo, responsable; no sobrescribir su historia.
+cat_categoria_hacienda: id_categoria PK, codigo_plan_cuentas, nombre, etapa_ciclo, categoria_padre_id FK (jerarquía), es_existencia_o_activo_bio, peso_referencia_ingreso_kg, peso_referencia_salida_kg.
+cat_lote: id_lote PK, nombre_lote, id_categoria FK, id_sector FK, id_unidad_negocio FK=BOVINOS, id_subunidad FK, id_linea_bovina FK nullable, fecha_apertura, fecha_cierre. Guardar cambios de etapa/línea como movimientos históricos, no sobreescribir registros pasados.
+cat_proveedor: id_proveedor PK, razon_social, cuit, rubro, condicion_iva.
+cat_cliente_consignatario: id_cliente PK, razon_social, cuit, tipo (Consignatario/Comprador directo/Frigorífico), es_agente_retencion.
+cat_fondo_pago: id_fondo PK, nombre, responsable, saldo_actual.
+cat_insumo: id_insumo PK, nombre, tipo_insumo (Alimento/Sanidad/Genética/Combustible), unidad_medida_base, id_proveedor_habitual FK opcional; NO registrar aquí un precio vigente como fuente del costo real.
+cat_animal (ficha individual, eje de trazabilidad): id_animal PK, caravana_rfid UNIQUE, fecha_nacimiento, sexo (M/H), id_categoria_actual FK, id_lote_actual FK, id_unidad_negocio FK=BOVINOS (permanente), id_subunidad_actual FK e id_linea_actual FK (variables con historial), id_padre FK→cat_animal, id_madre FK→cat_animal, estado (Activo/Vendido/Muerto/Reproductor_permanente), es_activo_biologico, fecha_alta_reproductor.
+cat_cotizacion (agregar): fecha, id_categoria, precio_kg, fuente.
+cat_parametros (agregar): todos los pesos, días, alícuotas y umbrales configurables.
+Movimientos
+mov_pesaje: id_pesaje PK, id_animal FK, fecha, peso_kg, id_lote FK, origen_dato (Manga/Balanza/Caravana electrónica).
+mov_cambio_categoria: id_cambio PK, id_animal FK, fecha, id_categoria_anterior FK, id_categoria_nueva FK, peso_al_cambio_kg, motivo (Bifurcación 280 kg / Destete / Selección Cabaña / Descarte), id_subunidad_resultante FK, id_linea_resultante FK opcional.
+mov_consumo_alimento: id_consumo PK, fecha, id_lote FK, id_subunidad FK, id_insumo FK, cantidad_real, unidad, kg_materia_seca_real_si_medido, origen_medicion, id_movimiento_stock FK, costo_asignado_desde_existencias; no ingresar un costo unitario arbitrario para reemplazar el circuito de compras.
+mov_sanitario: id_evento_sanitario PK, id_animal FK (nulo si es por lote), id_lote FK, fecha, id_insumo FK, tipo_evento (Vacunación/IATF/Servicio/Tratamiento), dosis, id_toro_padre FK.
+mov_reproductivo: id_evento_reproductivo PK, id_vaca FK, id_toro FK, fecha_servicio_iatf, fecha_diagnostico, resultado (Preñada/Vacía/Pendiente), fecha_parto.
+mov_venta_liquidacion (cabecera): id_venta PK, fecha (de emisión fiscal), id_cliente FK, id_unidad_negocio FK=BOVINOS, id_linea_bovina FK, tipo_venta (Hacienda_consumo/Reproductor_cabaña), nro_dte, nro_guia, total_kg_vivo, precio_kg_o_cabeza, importe_bruto, comision_consignatario, flete_feria, sellados_tasas, iva_debito_10_5, iva_credito_21 (sobre comisión y flete), retencion_iva_sufrida, retencion_ganancias_sufrida, retencion_iibb_sufrida, importe_neto_a_cobrar.
+mov_venta_detalle: id_detalle_venta PK, id_venta FK, id_animal FK, id_categoria FK, peso_kg, precio_aplicado, importe_linea.
+mov_traslado: id_traslado PK, fecha, id_lote FK, id_sector_origen FK, id_sector_destino FK, costo_flete.
+mov_mortandad: id_mortandad PK, id_animal FK, fecha, causa, valor_costo.
+mov_financiero: id_movimiento_fin PK, fecha, tipo_movimiento (Cobro/Pago/Rendición), id_fondo_pago FK, id_proveedor FK, id_cliente FK, id_venta FK, id_compra FK opcional, codigo_cuenta_contable, importe, concepto. El pago o cobro no sustituye la compra o venta que lo origina.
+Requisitos de carga de comprobantes (corrigen problemas de la planilla original)
+Cada comprobante debe registrar obligatoriamente: fecha de emisión fiscal (base del devengado, no la fecha de entrega administrativa), CUIT de la contraparte, tipo y letra de comprobante y punto de venta, neto gravado, IVA discriminado por alícuota (10,5% / 21% / 27%), percepciones/retenciones y total, medio de pago (transferencia, cheque, caja chica con rendición firmada) y, si es hacienda, cabezas, kg, categoría, precio unitario, Liquidación Primaria de Hacienda y DT-e.
+
+6 BIS. CORRECCIONES ESTRUCTURALES OBLIGATORIAS SEGÚN DEVOLUCIÓN ACADÉMICA
+Estas precisiones prevalecen ante cualquier tabla, regla o pantalla anterior que resulte contradictoria.
+A. Jerarquía de gestión, producción y destino
+La única unidad ganadera principal aquí desarrollada es BOVINOS. PORCINOS y OVINOS continúan como unidades independientes ya existentes.
+Cría, Recría, Adaptación y Engorde son subunidades o etapas productivas bovinas. Relacionarlas mediante `cat_subunidad_bovina` con la unidad BOVINOS; permitir parámetros, rendimientos, costos, consumos y reportes por etapa y campaña.
+Cabaña Angus se modela como línea productiva/destino genético (dimensión separada de la etapa), junto con Producción de Carne. Una misma etapa puede servir a una u otra línea; el destino puede ser provisional y modificarse con evento auditado.
+No usar el mismo `id_unidad_negocio` para significar simultáneamente especie, etapa y línea comercial. No sumar dos veces animales o costos al agrupar por distintas dimensiones. Mantener fecha de vigencia e historial de cambios.
+Dar al usuario filtros complementarios: unidad=Bovinos, subunidad/etapa, línea productiva, campaña, lote, categoría y titularidad.
+B. Compras y flujo completo de los insumos
+Aprovechar el módulo compartido de Compras si realmente existe y funciona, sin alterar sus resultados porcinos. Si hace falta ampliar campos compartidos, solicitar autorización y diseñar compatibilidad; de lo contrario agregar extensiones bovinas vinculadas. Implementar al menos:
+`mov_compra_cabecera`: id_compra PK, unidad_id, proveedor_id, fecha_emision, fecha_operacion/recepcion cuando difiera, tipo/letra/punto_venta/numero comprobante, moneda, estado (borrador/confirmada/anulada), neto, impuestos, percepciones, total, vencimiento y auditoría.
+`mov_compra_detalle`: id_detalle PK, id_compra FK, id_insumo FK o concepto de servicio, cantidad, unidad_medida, factor_conversion, precio_unitario_facturado, bonificacion, neto_linea, impuestos, id_subunidad/centro_costo destino si se conoce; permitir prorrateo si una compra abastece varias actividades.
+`mov_ingreso_insumo`/movimiento de almacén: recepciones parciales vinculadas a renglones de compra, cantidad realmente recibida, ubicación, lote de insumo, fecha y valuación. Una factura no implica necesariamente recepción total.
+`mov_salida_insumo`: consumo/entrega real a lote y etapa, fecha, cantidad, unidad, referencia a stock/recepción, responsable, método de costeo aprobado y costo asignado. Admitir ajustes, devoluciones y mermas auditadas.
+`mov_pago` o conciliación de `mov_financiero`: vincular uno o varios pagos con compras y sus saldos; admitir pago parcial y a crédito. Nunca tratar el pago como origen del costo o de las existencias.
+Circuito obligatorio y comprobable: compra documentada → detalle de renglones y precio real → recepción/ingreso a stock → utilización/consumo por etapa y lote → costo atribuible → indicador y margen; pagos y caja por circuito financiero paralelo. El valor del insumo consumido proviene de existencias valuadas conforme al método aprobado (p. ej., promedio ponderado o FIFO, según corresponda), no del último pago ni de un precio fijo en `cat_insumo`. Distinguir fecha del devengado, pago y consumo. Evitar doble registro del costo al comprar y luego consumir.
+C. Dosis técnica, consumo efectivo y referencias de campaña
+Crear `param_racion_bovina`/`param_dosis_tecnica`: versión vigente, campaña, subunidad, categoría/lote objetivo, insumo, dosis prevista, unidad (kg tal cual, kg materia seca, dosis por cabeza y día, etc.), período, fuente, responsable y fechas de vigencia. Es planificación, no consumo real.
+El consumo real se registra únicamente con salidas/consumos verificables. La diferencia real menos técnica se expresa en cantidad, porcentaje y costo, indicando denominadores, población y duración comparables. Cuando se trate de pastoreo no medido, no inventar consumos.
+Crear `param_rendimiento_campana`: clave única (`campaña`, `subunidad`, `indicador` y, solo si es pertinente, `línea productiva`), referencia única aprobada y versionada para cada combinación. Definir el rendimiento en unidades técnicamente apropiadas por etapa, nunca un objetivo universal de kilos o conversión. No generar referencias duplicadas ni sustituir el histórico al modificar metas.
+Indicadores: margen bruto ($), margen bruto sobre costos (%) = margen bruto / costos atribuibles × 100 (solo si costos positivos), desvío de rendimiento = real − meta y % = (real − meta)/meta × 100 cuando meta no sea cero, desvío de consumo = real − técnico y % = (real − técnico)/técnico × 100 cuando base técnica no sea cero. Mostrar signo, unidad, período, método, fuente y semáforo configurable; «Datos insuficientes» si falta base.
+D. Trazabilidad del margen bruto y los ingresos
+Vincular ventas y liquidaciones con detalles de animales/categorías, kilos, precio, gastos comerciales, impuestos, cobros y afectación de existencias. Registrar otras fuentes de ingresos reales con su comprobante y subunidad/línea asignadas cuando aplique.
+Crear asignaciones de costos (`mov_imputacion_costo` o estructura equivalente) que apunten al origen: detalle de compra/consumo, sanidad, mano de obra, servicios, fletes, amortización o distribución de costos indirectos. Registrar base de prorrateo, importe, etapa, campaña y línea si corresponde.
+Reconstruir margen bruto desde ingresos operativos menos costos atribuibles definidos en una política explícita (especificar si incluye comercialización, variación de existencias y producción biológica). Mostrar desglose y permitir abrir cada cifra hasta su movimiento/comprobante de origen. Distinguir margen económico de flujo de caja, IVA recuperable y costo de oportunidad.
+Cuadre: la suma de importes imputados no puede superar el origen, no puede imputarse el mismo consumo dos veces y debe permitir conciliar inventarios, ventas, costos y saldos.
+Incluir un reporte de trazabilidad: resultado → componentes → asignaciones → movimientos → comprobante original. Mantener constancia de correcciones y anulaciones.
+E. Pruebas de aceptación adicionales
+Compra de alimento a crédito con dos renglones a precios distintos → recepción parcial → salida a Recría → costo asignado, stock remanente y deuda: todos concilian.
+Pago parcial de la compra → disminuye deuda y caja, no vuelve a generar costo de alimentación.
+Precio del mismo insumo cambia entre facturas: el catálogo conserva su identidad, el detalle conserva cada precio y el costo consumido sigue el método de existencias elegido.
+Dosis técnica distinta del consumo real: se conserva cada fuente y se visualiza desvío por campaña/subunidad.
+Una meta de rendimiento modificada no reescribe períodos cerrados; no existen dos metas activas para la misma clave y vigencia.
+Cabaña Angus y Carne comparten una etapa, pero no duplican animales, stock, gastos o ingresos.
+Margen bruto y porcentaje sobre costos pueden reconstruirse línea por línea hasta comprobantes; resultados faltantes se indican como insuficientes, no se inventan.
+Regresión completa: ninguna nueva estructura altera compras, alimentación, costos, datos o indicadores de PORCINOS.
+7. REGLAS DE NEGOCIO (validaciones obligatorias)
+Categoría única: todo animal activo tiene exactamente una categoría vigente; toda transición se registra primero en mov_cambio_categoria.
+Selección de destino: sugerir revisión al alcanzar un umbral configurable, sin bloquear la operación; registrar decisión y responsable.
+Destino y contabilidad: clasificar según uso y política contable vigente; admitir venta o descarte de reproductores con reclasificación y baja auditadas.
+Alerta de GDP negativa: dos pesajes consecutivos en Adaptación o Engorde con ganancia diaria < 0 generan alerta de revisión sanitaria/nutricional.
+Precio MEJ: no forzar descuentos; utilizar precio de operación o cotización verificable de la categoría.
+Impuestos: calcular por concepto, fecha, jurisdicción y configuración validada; permitir excepciones justificadas y registro de respaldo.
+Trazabilidad en venta: exigir documentación e identificación aplicables al movimiento, con tratamiento de registros históricos y excepciones normativas documentadas; no inventar RFID faltantes.
+Eficiencia del toro: si la tasa de preñez de un toro en la temporada cae bajo un umbral configurable, se marca como candidato a Toro descarte.
+Descarte de madres: generar alertas configurables para revisión humana, sin efectuar bajas automáticas.
+Balance ganadero por categoría: SF = EI + Compras + Nacimientos ± Cambios de categoría − Ventas − Muertes − Otros egresos, calculado por fila independiente; mostrar error si no cierra.
+Hacienda propia vs. de terceros en bloques separados (independencia patrimonial).
+8. FUNCIONALIDADES / PANTALLAS
+Ficha del animal: datos, genealogía (padre/madre), historial de pesajes con gráfico, eventos sanitarios y reproductivos, cambios de categoría, valuación actual.
+Planilla de existencias mensual: por categoría, con columnas EI, Compras, Nacimientos, +CC, −CC, Ventas, Muertes, SF, valuación del SF a precio MAG. Período automático (mes calendario completo). Hacienda propia arriba, de terceros abajo.
+Registro histórico: cierre mensual archivado en tabla plana indexada por período, para análisis de tasas de parición, estacionalidad de mortandad y comparación entre ejercicios.
+Carga rápida de manga: pesaje y eventos por lectura de caravana RFID, individual o por lote.
+Liquidación de venta: cálculo automático (ver ejemplo) que genera el asiento contable, descuenta stock físico y actualiza cuentas de orden.
+Semáforo de decisión de venta (análisis incremental) en cada punto: Destete, Fin de recría, Fin de adaptación, Novillo terminado.
+Margen incremental = Valor esperado de venta futura − Valor de venta actual − Costos futuros de continuar.
+Los costos ya incurridos (hundidos) no intervienen; mostrar por separado costos acumulados (rentabilidad total) y costos incrementales (decisión).
+Presentar escenarios y sensibilidad a precio, plazo, ganancia de peso, costos y riesgo. Una tasa financiera elegida por el usuario (por ejemplo TAMAR, si corresponde) es solo una referencia: no emitir órdenes automáticas de vender/continuar.
+Precios tomados de operaciones reales o cotizaciones verificadas por fecha, categoría, plaza y fuente; mostrar antigüedad y avisar si no hay dato confiable.
+Módulo reproductivo: entore, IATF, tacto/ecografía, partos, asignación de padre por RFID o ADN.
+Tablero de indicadores (abajo).
+9. INDICADORES Y CONSULTAS DE GESTIÓN
+Stock físico por categoría (cabezas actuales, ordenado por código de cuenta).
+GDP promedio por lote y etapa (kg/día), ordenado de mayor a menor.
+Costo de alimentación por kg ganado por etapa: gasto total en alimento ÷ kg ganados.
+Conversión alimenticia: kg de materia seca consumida / kg ganado, solo si el consumo y la ganancia son medibles y comparables; en pastoreo sin medición, mostrar «no calculable» o estimación claramente rotulada.
+Días de permanencia por etapa.
+Margen bruto por cabeza vendida por línea productiva bovina (Carne vs. Cabaña): cabezas, ingresos, costos, margen promedio.
+Eficiencia reproductiva por toro: servicios, preñeces, % preñez (vacas preñadas confirmadas / vacas servidas × 100), terneros destetados vivos por toro, % de terneros asociables (terneros del toro / total nacidos × 100).
+Madres desechadas por año.
+Resultado ganadero anticipado: valorización por kilos agregados y por preñez antes de la venta.
+10. EJEMPLO DE VALIDACIÓN (liquidación de venta)
+Usalo solo como caso aritmético ficticio, sin validar tasas fiscales reales: 20 novillos × 450 kg = 9.000 kg a $3.500/kg vivo, por consignataria.
+Importe bruto: $31.500.000 (cuenta Venta de novillos terminados)
+Comisión 3%: $945.000 · Flete a feria: $450.000 · Sellados y tasas 1,5%: $472.500
+IVA débito 10,5% sobre bruto: $3.307.500
+IVA crédito 21% sobre comisión + flete ($1.395.000): $292.950 (los sellados no llevan IVA)
+Retención IIBB Córdoba: 1,75% sobre el 80% de (bruto + IVA) = $487.305 (crédito fiscal, no gasto)
+Neto a cobrar = bruto + IVA débito − gastos − IVA s/gastos − retenciones = $32.159.745 (ejemplo aritmético sujeto a supuestos ficticios, no liquidación fiscal real)
+Efecto físico: −20 cabezas en Novillos y −9.000 kg en kilos vendidos.
+Asiento: Debe Consignatario c/liquidación a cobrar, Comisión, Flete, Sellados, IVA CF, Retenciones IIBB sufridas / Haber Venta de novillos terminados, IVA DF. Debe balancear.
+
+11. EXPERIENCIA DE USUARIO Y PROCESOS
+Organizar navegación: Panel Bovino; Reproducción y Cría; Recría y Engorde; Cabaña Angus; Alimentación y Sanidad; Existencias y Movimientos; Compras y Ventas; Costos y Contabilidad; Indicadores y Cierres; Parámetros y Auditoría.
+Carga individual y masiva por lote, con posibilidad de corrección auditada; permitir identificación visual y electrónica cuando corresponda.
+Modelar eventos reproductivos separados: servicio/IATF, diagnóstico, parto, nacimiento, destete y descarte; vínculo madre-cría y padre cuando se conozca, sin inventar genealogías.
+En Cabaña Angus: identificación, genealogía, inscripciones, pedigree, DEP, evaluaciones y resultados de remates solo cuando haya documentación; venta de reproductores por cabeza o según condiciones reales.
+Para alimentación: compras, stock de insumos, raciones, consumo por lote, pastoreo y superficie, asignación de costos directos e indirectos con base documentada. Evitar precisión falsa.
+En ventas: operaciones por cabeza o por kg, comprador/consignatario, lotes, animales, liquidación, gastos, tributos, cobranzas y conciliación; separar devengado de cobrado y fecha fiscal de fecha operativa.
+En existencias: conciliación física y monetaria, titularidad propia/de terceros, transferencias internas sin duplicar animales, cierre y reapertura auditados.
+Panel de mando integral bovino con perspectivas financiera, clientes/comercial, procesos internos y aprendizaje/capacidades; metas editables, fórmula, fuente, periodicidad y responsable para cada indicador.
+12. REQUISITOS TÉCNICOS Y CONTROL DE CALIDAD
+Primero inspeccioná el código, tablas, relaciones, navegación y persistencia reales del proyecto. No supongas stack, endpoints ni Google Sheets si no están presentes.
+Proponé cambios incrementales con migraciones idempotentes, validación de integridad referencial, claves únicas, controles de permisos y registro de auditoría.
+Mantener sincronía entre movimientos individuales, lotes, stock y contabilidad; evitar doble conteo por reclasificaciones y movimientos internos.
+Manejar datos incompletos sin inventarlos; indicar «sin datos», «estimado» o «pendiente de validar».
+Pruebas mínimas: nacimiento→destete→recría→venta; selección→reproductor→descarte; movimientos entre potreros; mortandad; venta por consignatario; hacienda de terceros; cierre mensual; conciliación y regresión porcina.
+Datos ficticios de demostración deben quedar aislados de producción y ser eliminables.
+ENTREGABLES QUE TE PIDO
+Arquitectura de la sección bovina y cómo se integra con lo común y con porcino/ovino.
+Esquema de base de datos completo (catálogos, movimientos, relaciones FK→PK, índices).
+Implementación de las reglas de negocio como validaciones.
+Pantallas descriptas en la sección 8, con datos de ejemplo únicamente en entorno aislado de pruebas, jamás como registros reales.
+Consultas para cada indicador de la sección 9, incluidos margen bruto, porcentaje sobre costos, desvíos de rendimiento y consumo por campaña/subunidad.
+Diagrama del flujo compra → recepción → consumo → costo → margen, con relaciones PK/FK, conciliaciones y casos de prueba.
+Al final, una crítica de tu propia propuesta: limitaciones, cuellos de botella y mejoras para una segunda versión.
+FASE 1 OBLIGATORIA: antes de programar, auditá el estado actual y entregá mapa de módulos, matriz de correspondencia visual Porcinos↔Bovinos, inventario de dependencias compartidas, diferencias funcionales con Porcinos, modelo de datos propuesto, riesgos, respaldo y plan reversible, supuestos por validar y pruebas de regresión bovinas y porcinas. Esperá mi aprobación explícita. Después implementá por fases pequeñas, mostrando qué cambió, qué probaste y qué queda pendiente.

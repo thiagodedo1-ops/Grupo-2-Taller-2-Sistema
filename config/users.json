@@ -1,0 +1,212 @@
+[
+  {
+    "usuario_id": "USR_ADMIN_01",
+    "usuario": "admin",
+    "nombre": "Administrador Pozo del Carril",
+    "email": "admin@unrc.edu.ar",
+    "rol_id": "ROL_ADMIN",
+    "activo": true,
+    "unidades_autorizadas": [
+      "UN_PORCINOS",
+      "UN_BOVINOS",
+      "UN_OVINOS"
+    ],
+    "ultimo_acceso": "",
+    "sync_status": "SINCRONIZADO"
+  },
+  {
+    "usuario_id": "USR_ENCARGADO_01",
+    "usuario": "encargado",
+    "nombre": "Encargado de Producción",
+    "email": "encargado@unrc.edu.ar",
+    "rol_id": "ROL_ENCARGADO",
+    "activo": true,
+    "unidades_autorizadas": [
+      "UN_PORCINOS",
+      "UN_BOVINOS",
+      "UN_OVINOS"
+    ],
+    "ultimo_acceso": "",
+    "sync_status": "SINCRONIZADO"
+  },
+  {
+    "usuario_id": "USR_OPERARIO_01",
+    "usuario": "operario",
+    "nombre": "Operario de Galpón / Parideras",
+    "email": "operario@unrc.edu.ar",
+    "rol_id": "ROL_OPERARIO",
+    "activo": true,
+    "unidades_autorizadas": [
+      "UN_PORCINOS",
+      "UN_BOVINOS",
+      "UN_OVINOS"
+    ],
+    "ultimo_acceso": "",
+    "sync_status": "SINCRONIZADO"
+  },
+  {
+    "usuario_id": "USR_AUDITOR_01",
+    "usuario": "auditor",
+    "nombre": "Auditor Técnico / Consultor",
+    "email": "auditor@unrc.edu.ar",
+    "rol_id": "ROL_AUDITOR",
+    "activo": true,
+    "unidades_autorizadas": [
+      "UN_PORCINOS",
+      "UN_BOVINOS",
+      "UN_OVINOS"
+    ],
+    "ultimo_acceso": "",
+    "sync_status": "SINCRONIZADO"
+  },
+  {
+    "usuario_id": "USR_PROF_01",
+    "usuario": "profesor_test",
+    "nombre": "Profesor de Cátedra",
+    "email": "profesor@unrc.edu.ar",
+    "rol_id": "ROL_ADMIN",
+    "activo": true,
+    "unidades_autorizadas": [
+      "UN_PORCINOS",
+      "UN_BOVINOS",
+      "UN_OVINOS"
+    ],
+    "ultimo_acceso": "",
+    "sync_status": "SINCRONIZADO"
+  },
+  {
+    "usuario_id": "USR_MVTVQD8D_107",
+    "usuario": "juangallardo",
+    "nombre": "Juan Gallardo",
+    "email": "jgallardo@eco.unrc.edu.ar",
+    "rol_id": "ROL_ADMIN",
+    "activo": true,
+    "unidades_autorizadas": [
+      "UN_PORCINOS",
+      "UN_BOVINOS",
+      "UN_OVINOS"
+    ],
+    "ultimo_acceso": "2026-10-30T12:59:49.707Z",
+    "sync_status": "SINCRONIZADO"
+  },
+  {
+    "usuario_id": "USR_MVTVRZTC_274",
+    "usuario": "susanamussolini",
+    "nombre": "Susana Mussolini",
+    "email": "mmussolini@eco.unrc.edu.ar",
+    "rol_id": "ROL_ADMIN",
+    "activo": true,
+    "unidades_autorizadas": [
+      "UN_PORCINOS",
+      "UN_BOVINOS",
+      "UN_OVINOS"
+    ],
+    "ultimo_acceso": "2026-10-30T12:59:49.726Z",
+    "sync_status": "SINCRONIZADO"
+  },
+  {
+    "usuario_id": "USR_MVTW01LT_796",
+    "usuario": "pablopagano",
+    "nombre": "Pablo Pagano",
+    "email": "ppagano@eco.unrc.edu.ar",
+    "rol_id": "ROL_ADMIN",
+    "activo": true,
+    "unidades_autorizadas": [
+      "UN_PORCINOS",
+      "UN_BOVINOS",
+      "UN_OVINOS"
+    ],
+    "ultimo_acceso": "2026-10-30T12:59:49.732Z",
+    "sync_status": "SINCRONIZADO"
+  },
+  {
+    "usuario_id": "USR_MVTVWLFX_093",
+    "usuario": "nataliamartinez",
+    "nombre": "Natalia Martinez",
+    "email": "nataliamartinez@eco.unrc.edu.ar",
+    "rol_id": "ROL_ENCARGADO",
+    "activo": true,
+    "unidades_autorizadas": [
+      "UN_PORCINOS",
+      "UN_BOVINOS",
+      "UN_OVINOS"
+    ],
+    "ultimo_acceso": "2026-10-30T12:59:49.737Z",
+    "sync_status": "SINCRONIZADO"
+  },
+  {
+    "usuario_id": "USR_MVTVXN5B_357",
+    "usuario": "lucreciabissio",
+    "nombre": "Lucrecia Bissio",
+    "email": "lbissio@eco.unrc.edu.ar",
+    "rol_id": "ROL_ENCARGADO",
+    "activo": true,
+    "unidades_autorizadas": [
+      "UN_PORCINOS",
+      "UN_BOVINOS",
+      "UN_OVINOS"
+    ],
+    "ultimo_acceso": "2026-10-30T12:59:49.743Z",
+    "sync_status": "SINCRONIZADO"
+  },
+  {
+    "usuario_id": "USR_MVTVYA5J_954",
+    "usuario": "virginiacassano",
+    "nombre": "Virginia Cassano",
+    "email": "vcassano@eco.unrc.edu.ar",
+    "rol_id": "ROL_OPERARIO",
+    "activo": true,
+    "unidades_autorizadas": [
+      "UN_PORCINOS",
+      "UN_BOVINOS",
+      "UN_OVINOS"
+    ],
+    "ultimo_acceso": "2026-10-30T12:59:49.747Z",
+    "sync_status": "SINCRONIZADO"
+  },
+  {
+    "usuario_id": "USR_MVTVYTF6_051",
+    "usuario": "matiaspenalba",
+    "nombre": "Matias Penalba",
+    "email": "mpenalba@eco.unrc.edu.ar",
+    "rol_id": "ROL_OPERARIO",
+    "activo": true,
+    "unidades_autorizadas": [
+      "UN_PORCINOS",
+      "UN_BOVINOS",
+      "UN_OVINOS"
+    ],
+    "ultimo_acceso": "2026-10-30T12:59:49.751Z",
+    "sync_status": "SINCRONIZADO"
+  },
+  {
+    "usuario_id": "USR_MVTVZKJQ_616",
+    "usuario": "marianaarburua",
+    "nombre": "Mariana Arburua",
+    "email": "marburua@eco.unrc.edu.ar",
+    "rol_id": "ROL_AUDITOR",
+    "activo": true,
+    "unidades_autorizadas": [
+      "UN_PORCINOS",
+      "UN_BOVINOS",
+      "UN_OVINOS"
+    ],
+    "ultimo_acceso": "2026-10-30T12:59:49.755Z",
+    "sync_status": "SINCRONIZADO"
+  },
+  {
+    "usuario_id": "USR_LUISBIANCO_01",
+    "usuario": "luisbianco",
+    "nombre": "Luis Gabriel Bianco",
+    "email": "gabi_94@hotmail.es",
+    "rol_id": "ROL_AUDITOR",
+    "activo": true,
+    "unidades_autorizadas": [
+      "UN_PORCINOS",
+      "UN_BOVINOS",
+      "UN_OVINOS"
+    ],
+    "ultimo_acceso": "2026-10-30T13:08:07.454Z",
+    "sync_status": "SINCRONIZADO"
+  }
+]
